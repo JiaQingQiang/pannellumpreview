@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>全景图测试</title>
+    <link rel="stylesheet" href="lib/pannellum/pannellum.css">
+    <link rel="stylesheet" href="index.css">
+    <script src="lib/pannellum/pannellum.js"></script>
+</head>
+<body>
+<div id="container">
+    <div id="controls">
+        <div class="ctrl" id="pan-up">&#9650;</div>
+        <div class="ctrl" id="pan-down">&#9660;</div>
+        <div class="ctrl" id="pan-left">&#9664;</div>
+        <div class="ctrl" id="pan-right">&#9654;</div>
+        <div class="ctrl" id="zoom-in">&plus;</div>
+        <div class="ctrl" id="zoom-out">&minus;</div>
+        <div class="ctrl" id="fullscreen">&#x2922;</div>
+    </div>
+</div>
+<script src="jquery-3.6.0.min.js"></script>
+<script>
+    window.addEventListener('load', bodyLoad);
+    let viewer;
+    function bodyLoad() {
+        // 多场景配置
+        viewer = pannellum.viewer('container', {
+            "author":'GIS',
+            "autoLoad":true,
+            "compass": true,
+            "northOffset": -135,
+            "default": {
+                "firstScene": "803_b000",
+                "author": "GIS",
+                "sceneFadeDuration": 1000,
+                "showControls": false,
+            },
+
+            "scenes": {
+                "803_b000": {
+                    "title": "803_b000.png",
+                    "hfov": 110,
+                    "pitch": -3,
+                    "yaw": 117,
+                    "type": "equirectangular",
+                    "panorama": "./assets/803_b000.png",
+                    "hotSpots": [
+                        {
+                            "pitch": 5,
+                            "yaw": 0,
+                            "type": "scene",
+                            "text": "点我跳转到Scan_002.png全景",
+                            "sceneId": "Scan_002"
+                        },
+                        {
+                            'pitch':-15,//俯仰角(上下)
+                            'yaw':140,//偏航角(左右)
+                            'type':'info',
+                            "createTooltipFunc": hotspot,
+                            'text':'1'
+                        },
+                        // {
+                        //     'pitch':-8.5,//俯仰角(上下)
+                        //     'yaw':122.5,//偏航角(左右)
+                        //     'type':'info',
+                        //     "createTooltipFunc": hotspot,
+                        // },
+                        // {
+                        //     'pitch':-10.5,//俯仰角(上下)
+                        //     'yaw':121,//偏航角(左右)
+                        //     'type':'info',
+                        //     "createTooltipFunc": hotspot,
+                        // },
+                        // {
+                        //     'pitch':-16,//俯仰角(上下)
+                        //     'yaw':119,//偏航角(左右)
+                        //     'type':'info',
+                        //     "createTooltipFunc": hotspot,
+                        // },
+                        // {
+                        //     'pitch':-19,//俯仰角(上下)
+                        //     'yaw':119.5,//偏航角(左右)
+                        //     'type':'info',
+                        //     "createTooltipFunc": hotspot,
+                        // },{
+                        //     'pitch':-12,//俯仰角(上下)
+                        //     'yaw':125,//偏航角(左右)
+                        //     'type':'info',
+                        //     "createTooltipFunc": hotspot,
+                        // },
+                        {
+                            'pitch':-12.8,//俯仰角(上下)
+                            'yaw':126.5,//偏航角(左右)
+                            'type':'info',
+                            "createTooltipFunc": hotspot,
+                        },{
+                            'pitch':-18.6,//俯仰角(上下)
+                            'yaw':134.3,//偏航角(左右)
+                            'type':'info',
+                            "createTooltipFunc": hotspot,
+                            'text':'1'
+                        },{
+                            'pitch':-8.6,//俯仰角(上下)
+                            'yaw':159.3,//偏航角(左右)
+                            'type':'info',
+                            "createTooltipFunc": hotspot,
+                        },
+                        // {
+                        //     'pitch':-8.7,//俯仰角(上下)
+                        //     'yaw':162.8,//偏航角(左右)
+                        //     'type':'info',
+                        //     "createTooltipFunc": hotspot,
+                        // },{
+                        //     'pitch':-12.0,//俯仰角(上下)
+                        //     'yaw':163.1,//偏航角(左右)
+                        //     'type':'info',
+                        //     "createTooltipFunc": hotspot,
+                        // },
+                        {
+                            'pitch':-15,//俯仰角(上下)
+                            'yaw':-152,//偏航角(左右)
+                            'type':'info',
+                            "createTooltipFunc": hotspot,
+                        },
+                        // {
+                        //     'pitch':-30,//俯仰角(上下)
+                        //     'yaw':-159,//偏航角(左右)
+                        //     'type':'info',
+                        //     "createTooltipFunc": hotspot,
+                        // },{
+                        //     'pitch':-32,//俯仰角(上下)
+                        //     'yaw':-158,//偏航角(左右)
+                        //     'type':'info',
+                        //     "createTooltipFunc": hotspot,
+                        // },
+                        {
+                            'pitch':-33,//俯仰角(上下)
+                            'yaw':-161,//偏航角(左右)
+                            'type':'info',
+                            "createTooltipFunc": hotspot,
+                        }
+                    ]
+                },
+                "Scan_002": {
+                    "title": "Scan_002.png",
+                    "type": "equirectangular",
+                    "panorama": "./assets/Scan_002.png",
+                    "pitch": 0,
+                    "yaw": 110,
+                    "hfov": 120,
+                    "hotSpots": [
+                        {
+                            "pitch": 4,
+                            "yaw": 82,
+                            "type": "scene",
+                            "text": "点我跳转到803_b000.png全景",
+                            "sceneId": "803_b000",
+                            "targetYaw": -23,
+                            "targetPitch": 2
+                        },
+                        {
+                            'pitch':-20,
+                            'yaw':32,
+                            'type':'info',
+                            "createTooltipFunc": hotspot
+                        },
+                        {
+                            'pitch':-22,//俯仰角(上下)
+                            'yaw':72,//偏航角(左右)
+                            'type':'info',
+                            "createTooltipFunc": hotspot,
+                        },
+                        {
+                            'pitch':-35,//俯仰角(上下)
+                            'yaw':72,//偏航角(左右)
+                            'type':'info',
+                            "createTooltipFunc": hotspot,
+                        },{
+                            'pitch':-8,//俯仰角(上下)
+                            'yaw':115,//偏航角(左右)
+                            'type':'info',
+                            "createTooltipFunc": hotspot,
+                        },{
+                            'pitch':-24,//俯仰角(上下)
+                            'yaw':-107,//偏航角(左右)
+                            'type':'info',
+                            "createTooltipFunc": hotspot,
+                        },{
+                            'pitch':-38,//俯仰角(上下)
+                            'yaw':-128,//偏航角(左右)
+                            'type':'info',
+                            "createTooltipFunc": hotspot,
+                        },{
+                            'pitch':-32,//俯仰角(上下)
+                            'yaw':-140,//偏航角(左右)
+                            'type':'info',
+                            "createTooltipFunc": hotspot,
+                        },
+                    ]
+                }
+            }
+        });
+    }
+    // Make buttons work
+    document.getElementById('pan-up').addEventListener('click', function(e) {
+        viewer.setPitch(viewer.getPitch() + 10);
+    });
+    document.getElementById('pan-down').addEventListener('click', function(e) {
+        viewer.setPitch(viewer.getPitch() - 10);
+    });
+    document.getElementById('pan-left').addEventListener('click', function(e) {
+        viewer.setYaw(viewer.getYaw() - 10);
+    });
+    document.getElementById('pan-right').addEventListener('click', function(e) {
+        viewer.setYaw(viewer.getYaw() + 10);
+    });
+    document.getElementById('zoom-in').addEventListener('click', function(e) {
+        viewer.setHfov(viewer.getHfov() - 10);
+    });
+    document.getElementById('zoom-out').addEventListener('click', function(e) {
+        viewer.setHfov(viewer.getHfov() + 10);
+    });
+    document.getElementById('fullscreen').addEventListener('click', function(e) {
+        viewer.toggleFullscreen();
+    });
+
+    var test ;
+    function hotspot(hotSpotDiv, args) {
+        $(hotSpotDiv).addClass('custom-hotspotdiv');
+        $('.custom-hotspotdiv').hover(function () {
+            $(this).css({'background-image':'url(\'./assets/fingerprint.png\')','background-size':'100% 100%'})
+        },function () {
+            $(this).css({'background-image':'','background-size':''});
+        });
+        // hotSpotDiv.classList.add('custom-tooltip');
+        // var span = document.createElement('span');
+        // span.innerHTML = args;
+        // hotSpotDiv.appendChild(span);
+        // span.style.width = span.scrollWidth - 20 + 'px';
+        // span.style.marginLeft = -(span.scrollWidth - hotSpotDiv.offsetWidth) / 2 + 'px';
+        // span.style.marginTop = -span.scrollHeight - 12 + 'px';
+    }
+</script>
+</body>
+</html>
